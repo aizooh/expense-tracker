@@ -37,6 +37,7 @@ const App = () => {
 export default App;
 
 const Root = () => {
+
   //check if taken is present in local storage
   const isAuthenticated = !!localStorage.getItem("taken");
   return isAuthenticated ? (
