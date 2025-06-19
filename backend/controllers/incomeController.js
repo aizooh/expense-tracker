@@ -58,16 +58,20 @@ exports.downloadIncomeExcel = async (req, res) => {
     const incomes = await Income.find({ user: userId }).sort({ date: -1 });
   // Convert incomes to a format suitable for Excel
   const data =  incomes.map(income => ({
-        Source: incomes.source,
-        Amount: incomes.amount,
-        Date: incomes.date,
+        Source: income.source,
+        Amount: income.amount,
+        Date: income.date,
   }));
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(wb, ws, "Incomes");
-    XLSX.writeFile(wb, "incomes.xlsx");
-    res.download("incomes.xlsx");
+ // Generate a buffer
+        const buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
 
+        // Set headers so the browser/client knows this is an Excel file
+        res.setHeader("Content-Disposition", "attachment; filename=incomes.xlsx");
+        res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        res.send(buffer);
 } catch (error) {
         console.error("Error downloading income sources as Excel:", error);
         res.status(500).json({ message: "Server error", error: error.message });
