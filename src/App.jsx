@@ -1,11 +1,10 @@
-import React from 'react'
-
+import React from 'react';
 import {
-  BrowserRouter as Router ,
+  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-}from "react-router-dom";
+} from "react-router-dom";
 import SignUp from './pages/Auth/SignUp';
 import Login from './pages/Auth/Login';
 import Home from './pages/Dashboard/Home';
@@ -13,35 +12,28 @@ import Expense from './pages/Dashboard/Expense';
 import Income from './pages/Dashboard/Income';
 import UserProvider from './context/userContext';
 
-
-
-
 const App = () => {
   return (
     <UserProvider>
-    <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Root/>} />
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/signUp" exact element={<SignUp />} />
-          <Route path="/dashboard" exact element={<Home />} />
-          <Route path="/expense" exact element={<Expense />} />
-          <Route path="/income" exact element={<Income />} />
-         
+          <Route path="/" element={<Root />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/dashboard" element={<Home />} />
+          <Route path="/expense" element={<Expense />} />
+          <Route path="/income" element={<Income />} />
         </Routes>
       </Router>
-    </div>
     </UserProvider>
-  )
-}
+  );
+};
 
 export default App;
 
 const Root = () => {
-
-  //check if taken is present in local storage
-  const isAuthenticated = !!localStorage.getItem("taken");
+  // Check if token is present in local storage
+  const isAuthenticated = !!localStorage.getItem("taken"); // Change "taken" to "token" if that's what you use
   return isAuthenticated ? (
     <Navigate to="/dashboard" />
   ) : (
