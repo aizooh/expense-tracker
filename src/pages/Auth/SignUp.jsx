@@ -7,7 +7,6 @@ import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import { UserContext } from "../../context/UserContext";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
-// Make sure to import uploadImage if you use it
 import uploadImage from "../../utils/uploadImage";
 
 const SignUp = () => {
@@ -22,9 +21,11 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     let profileImageUrl = "";
+
+    // Form validation
     if (!fullName) {
       setError("Please enter your full name.");
-      return; 
+      return;
     }
     if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
@@ -40,14 +41,22 @@ const SignUp = () => {
       // Upload profile picture if provided
       if (profilePicture) {
         const imgUploadRes = await uploadImage(profilePicture);
-        profileImageUrl = imgUploadRes.imageUrl || "";
+        console.log("imgUploadRes:", imgUploadRes); // <-- LOG IT HERE
+        // FIX: Use the correct key!
+        profileImageUrl = imgUploadRes.profileImageUrl || "";
       }
+
+      // Submit registration
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         fullName,
         email,
         password,
-        profileImageUrl
+        profileImageUrl,
       });
+
+      // Log what backend returns
+      console.log("Register response:", response.data);
+
       const { token, user } = response.data;
       if (token) {
         localStorage.setItem("token", token);
