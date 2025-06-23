@@ -1,48 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import DashboardLayout from '../../components/layouts/DashboardLayout'
-import {useUserAuth} from "../../hooks/useUserAuth"
+import { useUserAuth } from "../../hooks/useUserAuth"
 import { useNavigate } from "react-router-dom";
 import { API_PATHS } from "../../utils/apiPaths"
-import  axiosInstance  from "../../utils/axiosInstance"
-
+import axiosInstance from "../../utils/axiosInstance"
 
 const Home = () => {
   useUserAuth();
-const navigate =useNavigate();
-const [dashboardData, setDashboardData]= useState(null);
-const [loading, setLoading]=useState(false);
-const fetchDashboardData = async () => {
-  if (loading)return;
-  setLoading(true);
-  try {
-    const response =await axiosInstance.get(
-      '${API_PATHS.DASHBOARD.GET_DATA}'
-    );
-    if(response.data){
-      setDashboardData(response.data);
+  const navigate = useNavigate();
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const fetchDashboardData = async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `${API_PATHS.DASHBOARD.GET_DATA}`
+      );
+      if (response.data) {
+        setDashboardData(response.data);
+      }
+    } catch (error) {
+      console.log("something went wrong. Please try again.", error)
     }
-  } catch (error){
-    console.log("something went wrong. Please try again.", error)
-  }
-  finally{
-    setLoading(false);
-  }
-};
+    finally {
+      setLoading(false);
+    }
+  };
 
-useEffect(() => {
-  fetchDashboardData();
-
-  return () => {
-    
-  }
-}, [])
+  useEffect(() => {
+    fetchDashboardData();
+    // No cleanup needed
+  }, []);
 
   return (
-    <DashboardLayout activeMenu ="Dashboard">
+    <DashboardLayout activeMenu="Dashboard">
       <div className="my-5 mx-auto">
         homes skjkj
-        </div>
-        </DashboardLayout>
+      </div>
+    </DashboardLayout>
   )
 }
 
