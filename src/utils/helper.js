@@ -1,13 +1,22 @@
 export const validateEmail = (email) => {
-    const regex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);   
 };
-export const getIntials =(name) => {
-    if(!name) return "";
-    const words = name.split("");
-    let initails ="";
-    for (let i=0; i< Math.min(words.length,2); i++){
-        initails += words[i][0];
+
+export const getInitials = (name) => {
+    if (!name) return "";
+    const words = name.trim().split(" ");
+    let initials = "";
+    for (let i = 0; i < Math.min(words.length, 2); i++) {
+        if (words[i][0]) initials += words[i][0];
     }
-    return initails.toUpperCase();
+    return initials.toUpperCase();
+};
+
+
+export const addThousandsSeparator = (num) => {
+    if (num === null || isNaN(num)) return "";
+    const [integerPart, fractionalPart] = num.toString().split(".");
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return fractionalPart ? `${formattedInteger}.${fractionalPart}` : formattedInteger;
 };
