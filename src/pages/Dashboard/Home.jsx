@@ -9,6 +9,7 @@ import InfoCard from "../../components/cards/InfoCard";
 import { LuHandCoins, LuWalletMinimal} from "react-icons/lu";
 import { addThousandsSeparator } from "../../utils/helper";
 import { IoCard } from 'react-icons/io5';
+import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 const Home = () => {
   useUserAuth();
   const navigate = useNavigate();
@@ -63,7 +64,14 @@ const Home = () => {
 
 
         </div>
-        homes skjkj
+        <div className="grid grid-cols-1 md:grid:cols-2 gap-6 mt-6 ">
+
+          <RecentTransactions 
+          transactions={dashboardData?.recentTransactions }
+          onSeeMore={() => navigate("/dashboard/expense")}         
+                    />
+        </div>
+
       </div>
     </DashboardLayout>
   )

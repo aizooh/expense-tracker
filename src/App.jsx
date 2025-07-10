@@ -15,7 +15,7 @@ import UserProvider from './context/userContext';
 const App = () => {
   return (
     <UserProvider>
-      <Router>
+      <Router basename="/expense-tracker/">
         <Routes>
           <Route path="/" element={<Root />} />
           <Route path="/login" element={<Login />} />
