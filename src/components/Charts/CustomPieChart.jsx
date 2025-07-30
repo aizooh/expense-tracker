@@ -1,32 +1,23 @@
 import React from "react";
-import {
-  PieChart,
-  Pie,
-  Legend,
-  Tooltip,
-  Cell,
-  ResponsiveContainer,
-} from "recharts";
+import { PieChart, Pie, Legend, Tooltip, Cell, ResponsiveContainer } from "recharts";
 import CustomToolTip from "./CustomToolTip";
-import CustomLegend from "./CustomLegend";
-
-const DEFAULT_COLORS = ['0088FE', '00C49F', 'FFBB28', 'FF8042', 'AF19FF', 'FF0050'];
 
 const CustomPieChart = ({
-  data = [],               // fallback to empty array
-  label = "",
-  totalAmount = "",
-  colors = DEFAULT_COLORS, // fallback to default colors
-  showTextAnchor = true,
+  data = [],
+  label,
+  totalAmount,
+  colors = ["000"], // default color if not provided
+  showTextAnchor,
 }) => {
-    console.log("PieChart Data (inside component):", data);
-  console.log("Colors array (inside component):", colors);
-  console.log("Colors array length:", colors.length);
+  // Always use fallback arrays to prevent runtime errors
+  const safeData = Array.isArray(data) ? data : [];
+  const safeColors = Array.isArray(colors) && colors.length > 0 ? colors : ["000"];
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <PieChart>
         <Pie
-          data={data}
+          data={safeData}
           dataKey="amount"
           nameKey="name"
           cx="50%"
@@ -35,18 +26,15 @@ const CustomPieChart = ({
           innerRadius={100}
           labelLine={false}
         >
-          {Array.isArray(data) &&
-            data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={colors[index % colors.length]}
-              />
-            ))}
+          {safeData.map((entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={`${safeColors[index % safeColors.length]}`}
+            />
+          ))}
         </Pie>
-
         <Tooltip content={CustomToolTip} />
-        <Legend content={CustomLegend} />
-
+        <Legend />
         {showTextAnchor && (
           <>
             <text

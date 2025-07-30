@@ -19,6 +19,7 @@ import RecentIncome from "../../components/Dashboard/RecentIncome"
 import IncomeOverview from "../../components/Income/IncomeOverview"
 
 const Home = () => {
+  
   useUserAuth();
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
@@ -46,8 +47,11 @@ const Home = () => {
     fetchDashboardData();
     // No cleanup needed
   }, []);
-
+console.log("dashboardData:", dashboardData);
+console.log("dashboardData.last30DaysExpenseTransactions:", dashboardData?.last30DaysExpenseTransactions);
+console.log("dashboardData.last30DaysExpenseTransactions.transactions:", dashboardData?.last30DaysExpenseTransactions?.transactions);
   return (
+    
     <DashboardLayout activeMenu="Dashboard">
       <div className="my-5 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -82,13 +86,13 @@ const Home = () => {
           totalIncome={dashboardData?.totalIncome || 0}
           totalExpense={dashboardData?.totalExpense || 0}
         />
-        <ExpenseTransactions 
-        transactions={dashboardData?.Last30DaysExpenses?.transactions || []}
-        onSeeMore={() => navigate("/expense")}
-        />
+   <ExpenseTransactions 
+  transactions={dashboardData?.last30DaysExpenseTransactions?.transactions || []}
+  onSeeMore={() => navigate("/expense")}
+/>
         <Last30DaysExpenses 
-        data={dashboardData?.last30DaysExpenses?.transactions || []}
-        />
+  data={dashboardData?.last30DaysExpenseTransactions?.transactions || []}
+/>
 
         <RecentIncomeWithChart
         data={dashboardData?.last60DaysIncome?.transactions?.slice(0,4) || []}
@@ -102,6 +106,7 @@ const Home = () => {
 
       </div>
     </DashboardLayout>
+    
   )
 }
 

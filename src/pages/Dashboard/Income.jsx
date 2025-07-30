@@ -45,7 +45,7 @@ const Income = () => {
   useEffect(() => {
     fetchIncomeDetails();
     return () => {
-      // Cleanup function
+      // Cleanup func tion
     };
   }, []); // Added dependency array
 

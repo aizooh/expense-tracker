@@ -1,37 +1,37 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import CustomPieChart from "../../components/Charts/CustomPieChart";
-const COLORS=['#875cf5', '#fa2c37', 'ff6900', '4f39f6'];
+const COLORS = ['#875CF5', '#FA2c37', '#FF6900', '#4F39F6'];
 
-const RecentIncomeWithChart = ({data, totalIncome}) => {
+const RecentIncomeWithChart = ({ data, totalIncome }) => {
+  const [chartData, setChartData] = useState([]);
 
-  const [chartData, setChartData] =useState([]);
-
-  const prepareChartData = () =>{ 
-    const dataArr = data?.map((item) =>({
-      name:item?.source,
-      value:item?.amount, 
+  const prepareChartData = () => {
+    const dataArr = data?.map((item) => ({
+      name: item?.source,
+      amount: item?.amount, // Changed value -> amount
     }));
     setChartData(dataArr);
   };
-  useEffect( () =>{
+
+  useEffect(() => {
     prepareChartData();
-    return () =>{};
-  } , [data]);
+    return () => {};
+  }, [data]);
+
   return (
     <div className="card">
       <div className="flex items-center justify-between">
-<h5 className="text-lg"> Last 60 days Income </h5>
+        <h5 className="text-lg"> Last 60 days Income </h5>
       </div>
       <CustomPieChart
-      data={chartData}
-      label="Total Income"
-      totalAmount={'$${totalIncome}'}
-      showTextAnchor
-      color={COLORS}
+        data={chartData}
+        label="Total Income"
+        totalAmount={`Ksh ${totalIncome}`}
+        showTextAnchor
+        colors={COLORS} // Fixed prop name
       />
-      
     </div>
-  )
-}
+  );
+};
 
-export default RecentIncomeWithChart
+export default RecentIncomeWithChart;
