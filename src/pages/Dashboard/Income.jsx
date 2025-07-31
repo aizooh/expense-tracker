@@ -4,8 +4,10 @@ import { useUserAuth } from "../../hooks/useUserAuth";
 import { API_PATHS } from "../../utils/apiPaths";
 import axiosInstance from "../../utils/axiosInstance";
 import IncomeOverview from "../../components/Income/IncomeOverview";
+import Modal from "../../components/Modal"; 
+import AddIncomeForm from "../../components/Income/AddIncomeForm";
 
-const Income = () => {
+const Income = () => {                       
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false); // Capitalized "State"
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
@@ -50,7 +52,7 @@ const Income = () => {
   }, []); // Added dependency array
 
   return (
-    <DashboardLayout activeMenu="income">
+    <DashboardLayout activeMenu="Income">
       <div className="my-5 mx-auto">
         <div className="grid grid-cols-1 gap-6 ">
           <div className="">
@@ -60,6 +62,14 @@ const Income = () => {
             />
           </div>
         </div>
+        <Modal 
+  isOpen={openAddIncomeModal}
+  onClose={() => setOpenAddIncomeModal(false)}
+  title="Add Income"
+>
+  <AddIncomeForm onAddIncome={handleAddIncome} />
+</Modal>
+
       </div>
     </DashboardLayout>
   );
