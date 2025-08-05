@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Input from "../../components/Input";
+import Input from "../../components/Inputs/Input";
+import EmojiPickerPopup from "../EmojiPickerPopup";
 
 const AddIncomeForm = ({ onAddIncome }) => {
   const [income, setIncome] = useState({
@@ -15,6 +16,10 @@ const AddIncomeForm = ({ onAddIncome }) => {
 
   return (
     <div>
+      <EmojiPickerPopup
+        value={income.icon}
+        onSelect={(selectedIcon) => handleChange('icon', SelectedIcon)}
+        />
       <Input 
         value={income.source}
         onChange={({ target }) => handleChange('source', target.value)}
