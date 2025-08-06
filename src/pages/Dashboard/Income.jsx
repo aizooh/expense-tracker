@@ -10,7 +10,9 @@ import AddIncomeForm from "../../components/Income/AddIncomeForm";
 import IncomeList from "../../components/Income/IncomeList";
 import DeleteAlert from "../../components/DeleteAlert";
 
-const Income = () => {                       
+
+const Income = () => {     
+   useUserAuth();                  
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false); // Capitalized "State"
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
@@ -89,7 +91,7 @@ const Income = () => {
       "Error deleting income:",
       error.response?.data?.message || error.message
     );
-    toast.error("Failed to delete income. Please try again."); // Show error toast
+    
   }
 }; // Fixed spelling of "async"
 
