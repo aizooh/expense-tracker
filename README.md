@@ -53,7 +53,7 @@ A full-stack Expense Tracker web application that helps users record, manage, an
 - MongoDb
 - Git
 
-https://aizooh.github.io/expense-tracker/login
+Explore project: https://aizooh.github.io/expense-tracker/login
 ### Clone the Repository
 
 ```bash
