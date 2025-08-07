@@ -50,9 +50,10 @@ A full-stack Expense Tracker web application that helps users record, manage, an
 ### Prerequisites
 
 - Node.js (v18+)
-- PostgreSQL
+- MongoDb
 - Git
 
+https://aizooh.github.io/expense-tracker/login
 ### Clone the Repository
 
 ```bash
