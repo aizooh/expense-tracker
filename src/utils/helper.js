@@ -39,7 +39,7 @@ export const prepareIncomeBarChartData = (data=[]) => {
     const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
 
     const chartData = sortedData.map((item) => ({
-        month:moment(item?.date).format('Do MMM'),
+        month:moment(item?.date).format('Do MMM YYYY'),
         amount:item?.amount,
         source:item?.source,
     }));
@@ -49,8 +49,36 @@ export const prepareIncomeBarChartData = (data=[]) => {
 export const prepareExpenseLineChartData = (data=[]) => {
     const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
     const chartData = sortedData.map((item) => ({
-        month: moment(item?.date).format('Do MMM'),
+       date: moment(item?.date).format('YYYY-MM-DD'),
+label: moment(item?.date).format('Do MMM'),
         amount: item?.amount,
         category: item?.category,
     }));
     return chartData;};
+// import moment from 'moment';
+
+// export const prepareExpenseLineChartData = (data = []) => {
+//   const grouped = {};
+
+//   data.forEach((item) => {
+//     const dateKey = moment(item.date).format('YYYY-MM-DD');
+//     if (!grouped[dateKey]) {
+//       grouped[dateKey] = {
+//         date: dateKey,
+//         amount: 0,
+//       };
+//     }
+//     grouped[dateKey].amount += item.amount;
+//   });
+
+//   const chartData = Object.entries(grouped)
+//     .map(([date, { amount }]) => ({
+//       date,
+//       amount,
+//       label: moment(date).format('Do MMM'),
+//     }))
+//     .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+//   console.log("🚀 Final Chart Data:", chartData);
+//   return chartData;
+// };

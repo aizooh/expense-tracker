@@ -6,6 +6,7 @@ import { prepareExpenseLineChartData } from '../../utils/helper';
 import { CustomLineChart } from '../Charts/CustomLineChart';
 
 export const ExpenseOverview = ({transactions, onExpenseIncome}) => {
+    console.log("📦 Transactions:", transactions);
     const [chartData, setChartData] = useState([]);
     useEffect(() => {
         const result= prepareExpenseLineChartData(transactions);

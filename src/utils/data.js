@@ -25,6 +25,6 @@ export const SIDE_MENU_DATA=[
         id:"06",
         label:"Logout",
         icon:LuLogOut,
-        path:"/logout",
+        path:"/login",
     },
 ];

@@ -109,7 +109,7 @@ const Expense = () => {
       <div className="grid grid-cols-1 gap-6">
         <div className="">        
           <ExpenseOverview 
-        transaction={expenseData}
+        transactions={expenseData}
         onExpenseIncome={()=>setOpenAddExpenseModal(true)}/>
 </div>   
 <ExpenseList 
