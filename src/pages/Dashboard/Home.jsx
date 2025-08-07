@@ -47,9 +47,9 @@ const Home = () => {
     fetchDashboardData();
     // No cleanup needed
   }, []);
-console.log("dashboardData:", dashboardData);
-console.log("dashboardData.last30DaysExpenseTransactions:", dashboardData?.last30DaysExpenseTransactions);
-console.log("dashboardData.last30DaysExpenseTransactions.transactions:", dashboardData?.last30DaysExpenseTransactions?.transactions);
+// console.log("dashboardData:", dashboardData);
+// console.log("dashboardData.last30DaysExpenseTransactions:", dashboardData?.last30DaysExpenseTransactions);
+// console.log("dashboardData.last30DaysExpenseTransactions.transactions:", dashboardData?.last30DaysExpenseTransactions?.transactions);
   return (
     
     <DashboardLayout activeMenu="Dashboard">

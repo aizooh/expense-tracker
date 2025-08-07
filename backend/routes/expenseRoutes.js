@@ -10,8 +10,8 @@ const router = express.Router();
 
 
 router.post("/add", protect, addExpense);
-router.get("/get", protect, getAllExpense);  
-router.delete("/:id", protect, deleteExpense);
+router.get("/getall", protect, getAllExpense);  
+router.delete("/delete/:id", protect, deleteExpense);
 router.get("/downloadexcel", protect, downloadExpenseExcel);
 
 console.log({ addExpense,

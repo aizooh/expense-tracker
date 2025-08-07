@@ -10,6 +10,8 @@ import { ExpenseOverview } from '../../components/Expense/ExpenseOverview';
 import { toast } from 'react-hot-toast'; // Fixed import statement
 import Modal from '../../components/Modal';
 import AddExpenseForm from '../../components/Expense/AddExpenseForm';
+import ExpenseList from '../../components/Expense/ExpenseList';
+import DeleteAlert from "../../components/DeleteAlert";
 
 const Expense = () => {
     useUserAuth();
@@ -86,9 +88,9 @@ const Expense = () => {
   //delete expense
     const deleteExpense = async (id) => {
   try {
-    await axiosInstance.delete(API_PATHs.EXPENSE.DELETE_EXPENSE(id));
+    await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
     setOpenDeleteAlert({ show: false, data: null });   // Close alert/modal
-    toast.success("Income deleted successfully");       // Show success toast
+    toast.success("Expense deleted successfully");       // Show success toast
     fetchIncomeDetails();                              // Refresh data
   } catch (error) {
     console.error(
@@ -99,8 +101,8 @@ const Expense = () => {
   }
 }; 
 
-  // Handle download income details 
-  const handleDownloadIncomeDetails = async () => {}; // Fixed function name
+  // Handle download Expense details 
+  const handleDownloadExpenseDetails = async () => {}; // Fixed function name
   return (
      <DashboardLayout activeMenu="Expense">
       <div className="my-5 mx-auto">
@@ -112,7 +114,7 @@ const Expense = () => {
 </div>   
 <ExpenseList 
 transactions= {expenseData}
-ondelete={(id)=> {
+onDelete={(id)=> {
   setOpenDeleteAlert({
     show: true,
     data: id,
@@ -127,7 +129,15 @@ title="Add Expense"
 >
 <AddExpenseForm onAddExpense={handleAddExpense} />
 </Modal>
-
+<Modal
+  isOpen={openDeleteAlert.show}
+  onClose={() => setOpenDeleteAlert({ show: false, data: null })}
+  title="Delete Expense">
+    <DeleteAlert
+    content="Are you sure you want to delete this Expense?"
+    onDelete={() => deleteExpense(openDeleteAlert.data)}
+    />
+</Modal>
     </div>
     </DashboardLayout>
   );

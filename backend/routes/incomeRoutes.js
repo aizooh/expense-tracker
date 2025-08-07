@@ -11,8 +11,8 @@ const router = express.Router();
 
 router.post("/add", protect, addIncome);
 router.get("/get", protect, getAllIncome);  
-router.delete("/:id", protect, deleteIncome);
+router.delete("/delete/:id", protect, deleteIncome);
 router.get("/downloadexcel", protect, downloadIncomeExcel);
 
 console.log({ addIncome, getAllIncome, deleteIncome, downloadIncomeExcel, protect });
-module.exports = router;
+module.exports = router; 
