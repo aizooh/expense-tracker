@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
 import { validateEmail } from "../../utils/helper";
 import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
-import { UserContext } from "../../context/userContext";
+import { userContext } from "../../context/userContext";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import uploadImage from "../../utils/uploadImage";
@@ -16,7 +16,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { updateUser } = useContext(UserContext);
+  const { updateUser } = useContext(userContext);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
