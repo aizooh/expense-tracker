@@ -1,0 +1,11 @@
+{
+	"devDependencies": {
+		"gh-pages": "^6.3.0"
+
+	},
+	"scripts": {
+  "build:frontend": "pnpm run --prefix frontend build",
+  "deploy": "pnpm run build:frontend && gh-pages -d frontend/dist --repo https://github.com/aizooh/expense-tracker.git"
+}
+ 
+}
