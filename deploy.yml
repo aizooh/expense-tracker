@@ -1,47 +1,16 @@
-# .github/workflows/deploy.yml
-name: Deploy Frontend to GitHub Pages
+# .github/workflows/deploy.yml (Partial Update)
+# ... (Steps before the build step are unchanged)
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20' # Use a stable Node version
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies (root level)
-        run: pnpm install --frozen-lockfile
-
-      - name: Change to frontend directory
-        run: cd frontend
+      # NOTE: The 'Change to frontend directory' step is redundant 
+      # and can be safely removed, as 'working-directory' handles it.
 
       - name: Build frontend (in frontend/)
         run: pnpm run build
         working-directory: ./frontend
+        env:
+          # 💡 INJECT THE RENDER API URL HERE
+          # Use the variable name your frontend code expects (e.g., VITE_APP_API_BASE_URL)
+          VITE_APP_API_BASE_URL: https://expense-tracker-backend-aizooh.onrender.com 
 
       # Use the 'deploy-pages' action to publish the built 'dist' folder
       - name: Deploy to GitHub Pages
