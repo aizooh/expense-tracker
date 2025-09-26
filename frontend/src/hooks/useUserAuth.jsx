@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/userContext";
+import { userContext } from "../context/userContext";
 import  axiosInstance  from "../utils/axiosInstance"; // adjust path as needed
 import { API_PATHS } from "../utils/apiPaths"; // adjust path as needed
 
 export const useUserAuth = () => {
-  const { user, updateUser, clearUser } = useContext(UserContext);
+  const { user, updateUser, clearUser } = useContext(userContext);
   const navigate = useNavigate();
 
   useEffect(() => {
