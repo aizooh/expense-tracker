@@ -18,7 +18,7 @@ jobs:
         with:
           version: 8
 
-      - name: Install dependencies
+      - name: Install dependencies (frontend only)
         working-directory: frontend
         run: pnpm install
 
