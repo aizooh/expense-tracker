@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const Income = require("../models/income"); // <-- UPPERCASE
+const Income = require("../models/Income"); // <-- UPPERCASE
 const protect = require("../middleware/authMiddleware");
 const XLSX = require("xlsx");
 // add income source
