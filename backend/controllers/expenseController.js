@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
-const Expense = require("../models/expense");
+const Expense = require("../models/Expense");
 const protect = require("../middleware/authMiddleware");
 const XLSX = require("xlsx");
 
