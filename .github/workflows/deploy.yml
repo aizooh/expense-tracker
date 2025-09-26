@@ -18,7 +18,7 @@ jobs:
         with:
           version: 8
 
-      - name: Install dependencies (frontend only)
+      - name: Install dependencies
         working-directory: frontend
         run: pnpm install
 
@@ -29,5 +29,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: frontend/dist
