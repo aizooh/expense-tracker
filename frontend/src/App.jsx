@@ -12,12 +12,14 @@ import Expense from './pages/Dashboard/Expense';
 import Income from './pages/Dashboard/Income';
 import UserProvider from './context/userContext';
 import { Toaster } from 'react-hot-toast';
+import AnalyticsTracker from './AnalyticsTracker';
 
 const App = () => {
   return (
     <UserProvider>
       <div>
       <Router basename="/expense-tracker/">
+      <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<Root />} />
           <Route path="/login" element={<Login />} />
